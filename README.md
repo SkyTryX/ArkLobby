@@ -1,5 +1,5 @@
 # LobbyMC
-A liteweight lobby plugin for Minecraft
+A lightweight lobby plugin for Minecraft
 
 1. Download it
 2. Put it in the /plugins folder of your Lobby server
