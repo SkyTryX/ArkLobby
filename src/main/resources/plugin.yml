@@ -2,3 +2,8 @@ name: LobbySystem
 version: '${project.version}'
 main: fr.skytryx.lobbysystem.LobbySystem
 api-version: 1.19
+commands:
+  build:
+    permission: lobby.build.use
+    description: Toggle build mode
+    usage: "§3Usage /build"

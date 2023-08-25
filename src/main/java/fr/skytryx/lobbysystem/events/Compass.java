@@ -56,7 +56,6 @@ public class Compass implements Listener {
         if(event.getView().getTitle().equals("§8Servers")){
             Player player = (Player) event.getWhoClicked();
             ByteArrayDataOutput out = ByteStreams.newDataOutput();
-            Bukkit.getMessenger().registerOutgoingPluginChannel(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("LobbySystem")), "BungeeCord");
             out.writeUTF("Connect");
             out.writeUTF(event.getCurrentItem().getItemMeta().getDisplayName().substring(2));
             player.sendPluginMessage(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("LobbySystem")), "BungeeCord", out.toByteArray());
