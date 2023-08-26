@@ -14,15 +14,19 @@ public class LobbyProtection implements Listener {
 
     @EventHandler
     public void onLobbyBreak(BlockBreakEvent event){
-        if(!CommandBuild.BuildMap.get(event.getPlayer())){
-            event.setCancelled(true);
+        if(CommandBuild.BuildMap.containsKey(event.getPlayer())){
+            if(!CommandBuild.BuildMap.get(event.getPlayer())){
+                event.setCancelled(true);
+            }
         }
     }
 
     @EventHandler
     public void onLobbyBreak(BlockPlaceEvent event){
-        if(!CommandBuild.BuildMap.get(event.getPlayer())){
-            event.setCancelled(true);
+        if(CommandBuild.BuildMap.containsKey(event.getPlayer())){
+            if(!CommandBuild.BuildMap.get(event.getPlayer())){
+                event.setCancelled(true);
+            }
         }
     }
 
@@ -32,8 +36,10 @@ public class LobbyProtection implements Listener {
             event.setCancelled(true);
         } else {
             Player player = (Player) event.getDamager();
-            if(!CommandBuild.BuildMap.get(player)){
-                event.setCancelled(true);
+            if(CommandBuild.BuildMap.containsKey(player)){
+                if(!CommandBuild.BuildMap.get(player)){
+                    event.setCancelled(true);
+                }
             }
         }
     }
