@@ -1,6 +1,8 @@
 package fr.skytryx.lobbysystem.events;
 
 import fr.skytryx.lobbysystem.commands.CommandBuild;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,6 +48,7 @@ public class LobbyProtection implements Listener {
 
     @EventHandler
     public void onJoinBuild(PlayerJoinEvent event){
+        event.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 0, 64, 0));
         if(!CommandBuild.BuildMap.containsKey(event.getPlayer())){
             CommandBuild.BuildMap.put(event.getPlayer(), false);
         }
