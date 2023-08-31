@@ -1,9 +1,15 @@
 name: PigmanLobby
 version: '${project.version}'
 main: fr.skytryx.pigmanlobby.PigmanLobby
-api-version: 1.19
+api-version: 1.20
 commands:
   build:
     permission: lobby.build.use
     description: Toggle build mode
-    usage: "§3Usage /build"
+    usage: "§3Usage: /build"
+  register:
+    description: Register your account
+    usage: "§3Usage: /register <password> <password>"
+  login:
+    description: Login to your account
+    usage: "§3Usage: /login <password>"
