@@ -1,17 +1,17 @@
-package fr.skytryx.lobbysystem;
+package fr.skytryx.pigmanlobby;
 
-import fr.skytryx.lobbysystem.commands.CommandBuild;
-import fr.skytryx.lobbysystem.events.Compass;
-import fr.skytryx.lobbysystem.events.DoubleJump;
-import fr.skytryx.lobbysystem.events.LobbyProtection;
-import fr.skytryx.lobbysystem.events.ScoreboardM;
+import fr.skytryx.pigmanlobby.commands.CommandBuild;
+import fr.skytryx.pigmanlobby.events.Compass;
+import fr.skytryx.pigmanlobby.events.DoubleJump;
+import fr.skytryx.pigmanlobby.events.LobbyProtection;
+import fr.skytryx.pigmanlobby.events.ScoreboardM;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
-public final class LobbySystem extends JavaPlugin {
+public final class PigmanLobby extends JavaPlugin {
 
     @Override
     public void onEnable() {
@@ -26,7 +26,7 @@ public final class LobbySystem extends JavaPlugin {
             @Override
             public void run() {
                 Bukkit.getOnlinePlayers().forEach(player ->{
-                    if(player.getLocation().getBlockY() <= 0){
+                    if(player.getLocation().getBlockY() <= -10){
                         player.teleport(new Location(Bukkit.getWorld("world"), 0, 64, 0));
                     }
                 });

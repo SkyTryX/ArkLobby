@@ -1,4 +1,4 @@
-package fr.skytryx.lobbysystem.events;
+package fr.skytryx.pigmanlobby.events;
 
 import org.bukkit.GameMode;
 import org.bukkit.Sound;

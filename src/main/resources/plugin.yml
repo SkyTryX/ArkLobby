@@ -1,6 +1,6 @@
-name: LobbySystem
+name: PigmanLobby
 version: '${project.version}'
-main: fr.skytryx.lobbysystem.LobbySystem
+main: fr.skytryx.pigmanlobby.PigmanLobby
 api-version: 1.19
 commands:
   build:

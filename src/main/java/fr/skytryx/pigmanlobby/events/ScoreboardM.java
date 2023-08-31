@@ -1,4 +1,4 @@
-package fr.skytryx.lobbysystem.events;
+package fr.skytryx.pigmanlobby.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -16,7 +16,7 @@ public class ScoreboardM implements Listener {
 
     @EventHandler
     public void JoinScoreboard(PlayerJoinEvent event){
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("LobbySystem")),() -> {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PigmanLobby")),() -> {
             ScoreboardManager manager = Bukkit.getScoreboardManager();
             Scoreboard scoreboard = manager.getNewScoreboard();
             Objective objective = scoreboard.registerNewObjective("Title", "dummy");

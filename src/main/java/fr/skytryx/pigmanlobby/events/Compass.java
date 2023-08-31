@@ -1,4 +1,4 @@
-package fr.skytryx.lobbysystem.events;
+package fr.skytryx.pigmanlobby.events;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -58,7 +58,7 @@ public class Compass implements Listener {
             ByteArrayDataOutput out = ByteStreams.newDataOutput();
             out.writeUTF("Connect");
             out.writeUTF(event.getCurrentItem().getItemMeta().getDisplayName().substring(2));
-            player.sendPluginMessage(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("LobbySystem")), "BungeeCord", out.toByteArray());
+            player.sendPluginMessage(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PigmanLobby")), "BungeeCord", out.toByteArray());
             event.setCancelled(true);
             player.sendMessage("§bSending you to "+ event.getCurrentItem().getItemMeta().getDisplayName());
         }
