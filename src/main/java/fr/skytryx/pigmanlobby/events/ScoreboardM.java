@@ -25,9 +25,12 @@ public class ScoreboardM implements Listener {
 
             objective.setDisplayName("§6§lPigmanLand");
             objective.getScore("§7§7-----------------").setScore(3);
-            objective.getScore("§bPseudo: §6"+event.getPlayer().getName()).setScore(2);
-            if(event.getPlayer().isOp()) objective.getScore("§bGrade: §4Admin").setScore(1);
-            else objective.getScore("§bGrade: §7Joueur").setScore(1);
+            objective.getScore("§bPseudo: §6"+event.getPlayer().getName()).setScore(3);
+            if(event.getPlayer().isOp()) objective.getScore("§bGrade: §4Admin").setScore(2);
+            else objective.getScore("§bGrade: §7Joueur").setScore(2);
+            if(Jump.jump_timer.containsKey(event.getPlayer())){
+                objective.getScore("§bJump: §6"+Jump.jump_timer.get(event.getPlayer())+" §bseconds").setScore(1);
+            }
             objective.getScore("§7-----------------").setScore(0);
             event.getPlayer().setScoreboard(scoreboard);
         }, 20L , 10L);
