@@ -19,13 +19,13 @@ public class CommandBuild implements CommandExecutor {
         if (BuildMap.containsKey(player)) {
             if (BuildMap.get(player)) {
                 BuildMap.put(player, false);
-                player.sendMessage("§c[Build] §bYou can no longer §6build");
+                player.sendMessage("§c[Build] §bTu ne peux plus §6construire");
             } else {
                 BuildMap.put(player, true);
-                player.sendMessage("§c[Build] §bYou can now §6build");
+                player.sendMessage("§c[Build] §bTu peux maintenant §6construire");
 
             }
-        } else  player.sendMessage("§c[Build] §bError, please relog!");
+        } else  player.sendMessage("§c[Build] §bErreur, déco-reco!");
         return true;
     }
 }

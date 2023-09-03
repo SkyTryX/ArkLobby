@@ -18,7 +18,6 @@ public final class PigmanLobby extends JavaPlugin {
     public void onEnable() {
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
-
         Objects.requireNonNull(getCommand("build")).setExecutor(new CommandBuild());
         Objects.requireNonNull(getCommand("register")).setExecutor(new CommandRegister());
         Objects.requireNonNull(getCommand("login")).setExecutor(new CommandLogin());
@@ -40,14 +39,16 @@ public final class PigmanLobby extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> LoginManager.LoginAwaiting.forEach(player ->{
             final YamlConfiguration loginconfig = YamlConfiguration.loadConfiguration(loginfile);
             if(loginconfig.get(String.valueOf(player.getUniqueId())) == null){
-                player.sendMessage("§cRegister using /register <password> <password>");
+                player.sendMessage("§cEnregistre toi avec /register <password> <password>");
                 player.sendMessage("§4Veuillez utiliser un mots de passe unique étant donné qu'ils ne sont pour l'instant pas sécurisés/encryptés");
-            } else player.sendMessage("§cLogin using /login <password>");
+            } else player.sendMessage("§cConnecte toi avec /login <password>");
         }), 0L, 100L);
+        Bukkit.getLogger().info("Le plugin est activé!");
     }
 
     @Override
     public void onDisable() {
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
+        Bukkit.getLogger().info("Le plugin est desactivé!");
     }
 }

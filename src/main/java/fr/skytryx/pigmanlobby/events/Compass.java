@@ -30,7 +30,7 @@ public class Compass implements Listener {
     public void OnJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
         player.getInventory().clear();
-        player.getInventory().setItem(4, ItemCreator(Material.COMPASS, "§6Server Selector"));
+        player.getInventory().setItem(4, ItemCreator(Material.COMPASS, "§6Selecteur de Serveur"));
     }
 
     @EventHandler
@@ -40,8 +40,8 @@ public class Compass implements Listener {
 
         if(item == null) return;
         if(LoginManager.LoginAwaiting.contains(event.getPlayer())) return;
-        if(item.getType() == Material.COMPASS && item.getItemMeta().getDisplayName().equals("§6Server Selector")){
-            Inventory menu = Bukkit.createInventory(null, 9, "§8Servers");
+        if(item.getType() == Material.COMPASS && item.getItemMeta().getDisplayName().equals("§6Selecteur de Serveur")){
+            Inventory menu = Bukkit.createInventory(null, 9, "§8Serveurs");
             menu.addItem(ItemCreator(Material.GRASS_BLOCK, "§6SMP"));
             menu.addItem(ItemCreator(Material.RED_BED, "§6Bedwars"));
             menu.addItem(ItemCreator(Material.DIAMOND_ORE, "§c???"));
@@ -54,14 +54,14 @@ public class Compass implements Listener {
     public void onInvClick(InventoryClickEvent event){
         if(event.getClickedInventory() == null) return;
         if(event.getCurrentItem() == null) return;
-        if(event.getView().getTitle().equals("§8Servers")){
+        if(event.getView().getTitle().equals("§8Serveurs")){
             Player player = (Player) event.getWhoClicked();
             ByteArrayDataOutput out = ByteStreams.newDataOutput();
             out.writeUTF("Connect");
             out.writeUTF(event.getCurrentItem().getItemMeta().getDisplayName().substring(2));
             player.sendPluginMessage(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PigmanLobby")), "BungeeCord", out.toByteArray());
             event.setCancelled(true);
-            player.sendMessage("§bSending you to "+ event.getCurrentItem().getItemMeta().getDisplayName());
+            player.sendMessage("§bTu vas rejoindre le serveur "+ event.getCurrentItem().getItemMeta().getDisplayName());
         }
     }
 }

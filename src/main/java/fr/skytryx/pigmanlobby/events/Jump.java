@@ -23,8 +23,8 @@ public class Jump implements Listener {
             if(Objects.requireNonNull(event.getClickedBlock()).getType().equals(Material.LIGHT_WEIGHTED_PRESSURE_PLATE)){
                 jump_timer.put(event.getPlayer(), 0);
                 event.getPlayer().setAllowFlight(false);
-                event.getPlayer().sendMessage("§c[Jump] §bThe jump has started, good luck hf!");
-                event.getPlayer().getInventory().setItem(8, Util.CreateItem(Material.BARRIER, "§cStop Jump", Collections.singletonList("§cArreter le jump")));
+                event.getPlayer().sendMessage("§c[Jump] §bLe jump commence, bonne chance!");
+                event.getPlayer().getInventory().setItem(8, Util.CreateItem(Material.BARRIER, "§cArrêter le Jump", Collections.singletonList("§cPour revenir au début du jump")));
                 if(scheduler.containsKey(event.getPlayer())){
                     Bukkit.getScheduler().cancelTask(scheduler.get(event.getPlayer()));
                 }
@@ -45,7 +45,7 @@ public class Jump implements Listener {
                 if(jump_timer.containsKey(event.getPlayer())){
                     event.getPlayer().getInventory().remove(Material.BARRIER);
                     event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), 0, 1, 0));
-                    event.getPlayer().sendMessage("§c[Jump] §bYou finished in §6"+jump_timer.get(event.getPlayer())+" §bseconds");
+                    event.getPlayer().sendMessage("§c[Jump] §bTu as finit le jump en §6"+jump_timer.get(event.getPlayer())+" §bsecondes");
                     event.getPlayer().setAllowFlight(true);
                     jump_timer.put(event.getPlayer(), -1);
 
@@ -53,11 +53,11 @@ public class Jump implements Listener {
             }
         } else if(Arrays.asList(Action.RIGHT_CLICK_AIR, Action.RIGHT_CLICK_BLOCK).contains(event.getAction())){
             if(event.getItem() != null){
-                if(event.getItem().getType() == Material.BARRIER && event.getItem().getItemMeta().getDisplayName().equals("§cStop Jump")){
+                if(event.getItem().getType() == Material.BARRIER && event.getItem().getItemMeta().getDisplayName().equals("§cArreter le jump")){
                     if(jump_timer.containsKey(event.getPlayer())){
                         jump_timer.put(event.getPlayer(), -1);
                         event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), 0, 1, 0));
-                        event.getPlayer().sendMessage("§c[Jump] §bJump has been cancelled");
+                        event.getPlayer().sendMessage("§c[Jump] §bTu as arrêté le jump.");
                         event.getPlayer().setAllowFlight(true);
                         event.getPlayer().getInventory().remove(Material.BARRIER);
                     }
