@@ -24,7 +24,7 @@ public class Jump implements Listener {
                 jump_timer.put(event.getPlayer(), 0);
                 event.getPlayer().setAllowFlight(false);
                 event.getPlayer().sendMessage("§c[Jump] §bLe jump commence, bonne chance!");
-                event.getPlayer().getInventory().setItem(8, Util.CreateItem(Material.BARRIER, "§cArrêter le Jump", Collections.singletonList("§cPour revenir au début du jump")));
+                event.getPlayer().getInventory().setItem(8, Util.CreateItem(Material.BARRIER, "§cArreter le jump", Collections.singletonList("§cPour revenir au début du jump")));
                 if(scheduler.containsKey(event.getPlayer())){
                     Bukkit.getScheduler().cancelTask(scheduler.get(event.getPlayer()));
                 }
