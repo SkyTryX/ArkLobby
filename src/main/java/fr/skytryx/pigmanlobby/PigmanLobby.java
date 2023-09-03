@@ -21,7 +21,7 @@ public final class PigmanLobby extends JavaPlugin {
 
         Objects.requireNonNull(getCommand("build")).setExecutor(new CommandBuild());
         Objects.requireNonNull(getCommand("register")).setExecutor(new CommandRegister());
-        Objects.requireNonNull(getCommand("loginn")).setExecutor(new CommandLogin());
+        Objects.requireNonNull(getCommand("login")).setExecutor(new CommandLogin());
 
         getServer().getPluginManager().registerEvents(new LoginManager(), this);
         getServer().getPluginManager().registerEvents(new Compass(), this);

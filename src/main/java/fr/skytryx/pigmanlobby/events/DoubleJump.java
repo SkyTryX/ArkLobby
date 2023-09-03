@@ -17,11 +17,6 @@ import org.bukkit.scheduler.BukkitRunnable;
             this.plugin = plugin;
         }
 
-        @EventHandler
-        public void setFly(PlayerJoinEvent e) {
-            e.getPlayer().setAllowFlight(true);
-            e.getPlayer().setFlying(false);
-        }
 
         @EventHandler
         public void setVelocity(PlayerToggleFlightEvent e) {

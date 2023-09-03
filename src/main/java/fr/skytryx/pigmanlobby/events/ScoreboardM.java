@@ -24,7 +24,7 @@ public class ScoreboardM implements Listener {
 
 
             objective.setDisplayName("§6§lPigmanLand");
-            objective.getScore("§7§7-----------------").setScore(3);
+            objective.getScore("§7§7-----------------").setScore(4);
             objective.getScore("§bPseudo: §6"+event.getPlayer().getName()).setScore(3);
             if(event.getPlayer().isOp()) objective.getScore("§bGrade: §4Admin").setScore(2);
             else objective.getScore("§bGrade: §7Joueur").setScore(2);

@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class CommandRegister implements CommandExecutor {
@@ -25,9 +26,16 @@ public class CommandRegister implements CommandExecutor {
 
         if(loginconfig.get(String.valueOf(player.getUniqueId())) == null){
             player.sendMessage("§c[Login] §bYou successfully logged in!");
-            loginconfig.set(String.valueOf(player.getUniqueId()), strings[1]);
+            loginconfig.set(String.valueOf(player.getUniqueId()), strings[0]);
             player.clearActivePotionEffects();
             LoginManager.LoginAwaiting.remove(player);
+            player.setAllowFlight(true);
+            player.setFlying(false);
+            try {
+                loginconfig.save(loginfile);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         return true;
     }
