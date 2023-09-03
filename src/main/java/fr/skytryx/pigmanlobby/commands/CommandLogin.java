@@ -29,13 +29,13 @@ public class CommandLogin implements CommandExecutor {
             return false;
         } else{
             if(Objects.equals(loginconfig.getString(String.valueOf(player.getUniqueId())), strings[0])){
-                player.sendMessage("§c[Login] §bYou successfully logged in!");
+                player.sendMessage("§c[Login] §bMots de passe correct. Bon jeu!");
                 player.clearActivePotionEffects();
                 LoginManager.LoginAwaiting.remove(player);
                 player.setAllowFlight(true);
                 player.setFlying(false);
             } else{
-                player.kick(Component.text("Wrong Password").color(TextColor.color(255, 0, 0)));
+                player.kick(Component.text("Mots de passe faux").color(TextColor.color(255, 0, 0)));
             }
         }
             return true;

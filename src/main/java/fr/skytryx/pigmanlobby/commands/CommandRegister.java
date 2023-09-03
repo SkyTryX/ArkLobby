@@ -25,7 +25,7 @@ public class CommandRegister implements CommandExecutor {
         Player player = (Player) commandSender;
 
         if(loginconfig.get(String.valueOf(player.getUniqueId())) == null){
-            player.sendMessage("§c[Login] §bYou successfully logged in!");
+            player.sendMessage("§c[Login] §bEnregistrement completé. Bon jeu!");
             loginconfig.set(String.valueOf(player.getUniqueId()), strings[0]);
             player.clearActivePotionEffects();
             LoginManager.LoginAwaiting.remove(player);
