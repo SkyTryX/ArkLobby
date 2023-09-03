@@ -43,12 +43,12 @@ public final class PigmanLobby extends JavaPlugin {
                 player.sendMessage("§4Veuillez utiliser un mots de passe unique étant donné qu'ils ne sont pour l'instant pas sécurisés/encryptés");
             } else player.sendMessage("§cConnecte toi avec /login <password>");
         }), 0L, 100L);
-        Bukkit.getLogger().info("Le plugin est activé!");
+        Bukkit.getLogger().info("[PigmanLobby] Le plugin est activé!");
     }
 
     @Override
     public void onDisable() {
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
-        Bukkit.getLogger().info("Le plugin est desactivé!");
+        Bukkit.getLogger().info("[PigmanLobby] Le plugin est desactivé!");
     }
 }
