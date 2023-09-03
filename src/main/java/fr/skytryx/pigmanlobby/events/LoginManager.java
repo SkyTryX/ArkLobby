@@ -1,5 +1,7 @@
 package fr.skytryx.pigmanlobby.events;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +19,7 @@ public class LoginManager implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
         LoginAwaiting.add(event.getPlayer());
+        event.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 0.5, 1, 0.5));
         event.getPlayer().addPotionEffects(Arrays.asList(new PotionEffect(PotionEffectType.BLINDNESS, 99999, 255, true),
                 new PotionEffect(PotionEffectType.JUMP, 999999, 150, true),
                 new PotionEffect(PotionEffectType.SLOW, 999999, 255, true)));

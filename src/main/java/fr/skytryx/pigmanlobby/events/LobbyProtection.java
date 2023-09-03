@@ -32,7 +32,6 @@ public class LobbyProtection implements Listener {
 
     @EventHandler
     public void onJoinBuild(PlayerJoinEvent event){
-        event.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 0, 1, 0));
         if(!CommandBuild.BuildMap.containsKey(event.getPlayer())){
             CommandBuild.BuildMap.put(event.getPlayer(), false);
         }

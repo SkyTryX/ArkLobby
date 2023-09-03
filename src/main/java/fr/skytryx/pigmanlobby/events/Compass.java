@@ -39,6 +39,7 @@ public class Compass implements Listener {
         ItemStack item = event.getItem();
 
         if(item == null) return;
+        if(LoginManager.LoginAwaiting.contains(event.getPlayer())) return;
         if(item.getType() == Material.COMPASS && item.getItemMeta().getDisplayName().equals("§6Server Selector")){
             Inventory menu = Bukkit.createInventory(null, 9, "§8Servers");
             menu.addItem(ItemCreator(Material.GRASS_BLOCK, "§6SMP"));
