@@ -13,3 +13,7 @@ commands:
   login:
     description: Login to your account
     usage: "§3Usage: /login <password>"
+  unregister:
+    description: Unregister a player from the server
+    usage: "§3Usage: /unregister <ign>"
+    permission: lobby.unregister.use

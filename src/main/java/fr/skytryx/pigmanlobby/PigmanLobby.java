@@ -3,6 +3,7 @@ package fr.skytryx.pigmanlobby;
 import fr.skytryx.pigmanlobby.commands.CommandBuild;
 import fr.skytryx.pigmanlobby.commands.CommandLogin;
 import fr.skytryx.pigmanlobby.commands.CommandRegister;
+import fr.skytryx.pigmanlobby.commands.staff.CommandUnregister;
 import fr.skytryx.pigmanlobby.events.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -21,6 +22,7 @@ public final class PigmanLobby extends JavaPlugin {
         Objects.requireNonNull(getCommand("build")).setExecutor(new CommandBuild());
         Objects.requireNonNull(getCommand("register")).setExecutor(new CommandRegister());
         Objects.requireNonNull(getCommand("login")).setExecutor(new CommandLogin());
+        Objects.requireNonNull(getCommand("unregister")).setExecutor(new CommandUnregister());
 
         getServer().getPluginManager().registerEvents(new LoginManager(), this);
         getServer().getPluginManager().registerEvents(new Compass(), this);
