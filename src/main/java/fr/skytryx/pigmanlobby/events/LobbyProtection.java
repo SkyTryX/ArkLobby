@@ -1,9 +1,6 @@
 package fr.skytryx.pigmanlobby.events;
 
 import fr.skytryx.pigmanlobby.commands.CommandBuild;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -41,14 +38,10 @@ public class LobbyProtection implements Listener {
 
     @EventHandler
         public void onDamage(EntityDamageEvent event){
-        Entity entity = event.getEntity();
-        // definit entity pour pouvoir uttiliser la variable dans le if
-            if (entity instanceof Player){
-                Player player = (Player) entity;
-                //definit player dans entity apres avoir verifié que c'etait bien un jouer
+            if (event.getEntity() instanceof Player){
+                Player player = (Player) event.getEntity();
                 if (!(ArenaManager.ArenaList.contains(player))) {
                     event.setCancelled(true);
-                    //autorise les degat si il est dans la liste
                 }
             }
     }

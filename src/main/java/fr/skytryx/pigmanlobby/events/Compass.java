@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class Compass implements Listener {
 
-    public ItemStack ItemCreator(Material mat, String name){
+    public static ItemStack ItemCreator(Material mat, String name){
         ItemStack item = new ItemStack(mat);
         ItemMeta itemmeta  = item.getItemMeta();
         itemmeta.setDisplayName(name);
@@ -30,8 +30,8 @@ public class Compass implements Listener {
     public void OnJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
         player.getInventory().clear();
-        player.getInventory().setItem(4, ItemCreator(Material.COMPASS, "§6Selecteur de Serveur"));
-        player.getInventory().setItem(8, ItemCreator(Material.DIAMOND_SWORD, "§6Arene de combat"));
+        player.getInventory().setItem(0, ItemCreator(Material.COMPASS, "§6Selecteur de Serveur"));
+        player.getInventory().setItem(1, ItemCreator(Material.BOW, "§6ArenePvP"));
     }
 
     @EventHandler
