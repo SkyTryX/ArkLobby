@@ -30,6 +30,9 @@ public class ArenaManager implements Listener {
             event.getPlayer().setAllowFlight(false);
             ArenaList.add(player);
 
+            if(Jump.jump_timer.containsKey(player)) {
+                Jump.jump_timer.put(player, -1);
+            }
             ItemStack casque = new ItemStack(Material.DIAMOND_HELMET);
             ItemStack plastron = new ItemStack(Material.DIAMOND_CHESTPLATE);
             ItemStack jambiere = new ItemStack(Material.DIAMOND_LEGGINGS);
@@ -49,6 +52,7 @@ public class ArenaManager implements Listener {
             player.getInventory().clear();
             player.setHealth(Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
             player.setSaturation(20);
+            player.setFoodLevel(20);
             player.getInventory().setItem(0, Compass.ItemCreator(Material.COMPASS, "§6Selecteur de Serveur"));
             player.getInventory().setItem(1, Compass.ItemCreator(Material.BOW, "§6ArenePvP"));player.teleport(new Location(player.getWorld(), 0.5, 1, 0.5));
             player.sendMessage("§c[ArenePvP] §bTu es maintenant au lobby");
@@ -69,6 +73,7 @@ public class ArenaManager implements Listener {
             event.getPlayer().getInventory().clear();
             event.getPlayer().setHealth(Objects.requireNonNull(event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
             event.getPlayer().setSaturation(20);
+            event.getPlayer().setFoodLevel(20);
             event.getPlayer().getInventory().setItem(0, Compass.ItemCreator(Material.COMPASS, "§6Selecteur de Serveur"));
             event.getPlayer().getInventory().setItem(1, Compass.ItemCreator(Material.BOW, "§6ArenePvP"));
             event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), 0.5, 1, 0.5));
