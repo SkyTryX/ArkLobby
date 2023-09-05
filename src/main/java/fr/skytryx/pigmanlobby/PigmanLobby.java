@@ -30,6 +30,7 @@ public final class PigmanLobby extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LobbyProtection(), this);
         getServer().getPluginManager().registerEvents(new ScoreboardM(), this);
         getServer().getPluginManager().registerEvents(new Jump(), this);
+        getServer().getPluginManager().registerEvents(new ArenaManager(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach(player ->{
             if(player.getLocation().getBlockY() <= -10){
