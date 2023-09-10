@@ -1,38 +1,48 @@
 package fr.skytryx.pigmanlobby.events;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ScoreboardM implements Listener {
 
-
+    Map<Player, Integer> list_scheduler = new HashMap<>();
     @EventHandler
     public void JoinScoreboard(PlayerJoinEvent event){
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PigmanLobby")),() -> {
-            ScoreboardManager manager = Bukkit.getScoreboardManager();
-            Scoreboard scoreboard = manager.getNewScoreboard();
-            Objective objective = scoreboard.registerNewObjective("Title", "dummy");
+        int a = Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PigmanLobby")),() -> {
+            Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+            Objective objective = scoreboard.registerNewObjective("PigmanLand", "dummy", "Lobby Server");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-
-
-            objective.setDisplayName("§6§lPigmanLand");
-            objective.getScore("§7§7-----------------").setScore(4);
-            objective.getScore("§bPseudo: §6"+event.getPlayer().getName()).setScore(3);
-            if(event.getPlayer().isOp()) objective.getScore("§bGrade: §4Admin").setScore(2);
-            else objective.getScore("§bGrade: §7Joueur").setScore(2);
-            if(Jump.jump_timer.containsKey(event.getPlayer())){
-                objective.getScore("§bJump: §6"+Jump.jump_timer.get(event.getPlayer())+" §bseconds").setScore(1);
-            }
+            objective.displayName(Component.text("PigmanLand").color(TextColor.color(255, 165, 0)).decorate(TextDecoration.BOLD));
+            objective.getScore("§7§7-----------------").setScore(5);
+            objective.getScore("§bGrade: §7...").setScore(4);
+            objective.getScore("§bPing: §6"+event.getPlayer().getPing()+"§bms").setScore(3);
+            objective.getScore(" ").setScore(2);
+            objective.getScore("§bTPS: §6"+ Math.round(Arrays.stream(Bukkit.getTPS()).sum()/3)).setScore(1);
             objective.getScore("§7-----------------").setScore(0);
             event.getPlayer().setScoreboard(scoreboard);
-        }, 20L , 10L);
+        }, 0L , 20L);
+        list_scheduler.put(event.getPlayer(), a);
+    }
+
+    @EventHandler
+    public void QuitScoreboard(PlayerQuitEvent event){
+        if(list_scheduler.containsKey(event.getPlayer())){
+            Bukkit.getScheduler().cancelTask(list_scheduler.get(event.getPlayer()));
+        }
     }
 }

@@ -1,12 +1,14 @@
 package fr.skytryx.pigmanlobby.events;
 
 import fr.skytryx.pigmanlobby.commands.CommandBuild;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class LobbyProtection implements Listener {
@@ -44,5 +46,14 @@ public class LobbyProtection implements Listener {
                     event.setCancelled(true);
                 }
             }
+    }
+
+    @EventHandler
+    public void onHunger(FoodLevelChangeEvent event){
+        if(event.getEntity().getType() != EntityType.PLAYER) return;
+        Player player = (Player) event.getEntity();
+        if(!ArenaManager.ArenaList.contains(player)){
+            event.setCancelled(true);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package fr.skytryx.pigmanlobby.events;
 
 import fr.skytryx.pigmanlobby.Util;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -37,6 +39,7 @@ public class Jump implements Listener {
                             Bukkit.getScheduler().cancelTask(task_id);
                         } else{
                             jump_timer.put(event.getPlayer(), jump_timer.get(event.getPlayer())+1);
+                            event.getPlayer().sendActionBar(Component.text("Jump: "+ jump_timer.get(event.getPlayer()) + "s").color(TextColor.color(0, 255, 0)));
                         }
                     }
                 }, 20L, 20L);
