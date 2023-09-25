@@ -3,6 +3,7 @@ package fr.skytryx.pigmanlobby;
 import fr.skytryx.pigmanlobby.commands.CommandBuild;
 import fr.skytryx.pigmanlobby.commands.CommandLogin;
 import fr.skytryx.pigmanlobby.commands.CommandRegister;
+import fr.skytryx.pigmanlobby.commands.CommandWhitelist;
 import fr.skytryx.pigmanlobby.commands.staff.CommandUnregister;
 import fr.skytryx.pigmanlobby.events.*;
 import org.bukkit.Bukkit;
@@ -23,6 +24,7 @@ public final class PigmanLobby extends JavaPlugin {
         Objects.requireNonNull(getCommand("register")).setExecutor(new CommandRegister());
         Objects.requireNonNull(getCommand("login")).setExecutor(new CommandLogin());
         Objects.requireNonNull(getCommand("unregister")).setExecutor(new CommandUnregister());
+        Objects.requireNonNull(getCommand("whitelist")).setExecutor(new CommandWhitelist());
 
         getServer().getPluginManager().registerEvents(new LoginManager(), this);
         getServer().getPluginManager().registerEvents(new Compass(), this);
@@ -31,6 +33,7 @@ public final class PigmanLobby extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ScoreboardM(), this);
         getServer().getPluginManager().registerEvents(new Jump(), this);
         getServer().getPluginManager().registerEvents(new ArenaManager(), this);
+        getServer().getPluginManager().registerEvents(new Whitelist(), this);
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach(player ->{
             if(player.getLocation().getBlockY() <= -10){

@@ -17,3 +17,7 @@ commands:
     description: Unregister a player from the server
     usage: "§3Usage: /unregister <ign>"
     permission: lobby.unregister.use
+  whitelist:
+    description: Adds/removes a player from the whitelist
+    usage: "§3Usage: /whitelist <ign>"
+    permission: lobby.whitelist.use
