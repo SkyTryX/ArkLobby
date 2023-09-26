@@ -1,21 +1,20 @@
 package fr.skytryx.pigmanlobby.events;
 
+import fr.skytryx.pigmanlobby.commands.CommandWhitelist;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-
-import java.util.Arrays;
-import java.util.List;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 public class Whitelist implements Listener {
-    public static List<String> list = Arrays.asList("SkyTryX", "TIMANI", "lupino_craft", "LurmLeveling", "blastspirits", "Pinguino", "Matteo34800");
 
     @EventHandler
-    public void wlCheck(PlayerJoinEvent event){
-        if(!list.contains(event.getPlayer().getName())){
-            event.getPlayer().kick(Component.text("Tu n'es pas dans la whitelist").color(TextColor.color(255, 0, 0)));
+    public void wlCheck(AsyncPlayerPreLoginEvent event){
+        if(CommandWhitelist.isWhitelisted){
+            if(!CommandWhitelist.list.contains(event.getPlayerProfile().getName())){
+                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, Component.text("Tu n'es pas dans la whitelist").color(TextColor.color(255, 0, 0)));
+            }
         }
     }
 }
