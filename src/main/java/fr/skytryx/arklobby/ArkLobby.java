@@ -49,12 +49,12 @@ public final class ArkLobby extends JavaPlugin {
                 player.sendMessage("§4Veuillez utiliser un mots de passe unique étant donné qu'ils ne sont pour l'instant pas sécurisés/encryptés");
             } else player.sendMessage("§cConnecte toi avec /login <password>");
         }), 0L, 100L);
-        Bukkit.getLogger().info("[PigmanLobby] Le plugin est activé!");
+        Bukkit.getLogger().info("[ArkLobby] Plugin Enabled");
     }
 
     @Override
     public void onDisable() {
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
-        Bukkit.getLogger().info("[PigmanLobby] Le plugin est desactivé!");
+        Bukkit.getLogger().info("[ArkLobby] Plugin Disabled");
     }
 }
