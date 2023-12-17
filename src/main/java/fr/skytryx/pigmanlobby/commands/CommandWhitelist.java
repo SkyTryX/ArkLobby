@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CommandWhitelist implements CommandExecutor {
 
-    public static List<String> list = new LinkedList<>(Arrays.asList("SkyTryX", "TIMANI", "lupino_craft", "LurmLeveling", "blastspirits", "Pinguino", "Matteo34800"));
+    public static List<String> list = new LinkedList<>(Arrays.asList("SkyTryX", "TIMANI", "lupino_craft", "LurmLeveling", "blastspirits", "Pinguino", "Matteo34800", "Arch_ego"));
     public static boolean isWhitelisted = true;
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {

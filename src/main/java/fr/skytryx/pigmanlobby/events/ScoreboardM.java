@@ -25,9 +25,9 @@ public class ScoreboardM implements Listener {
     public void JoinScoreboard(PlayerJoinEvent event){
         int a = Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PigmanLobby")),() -> {
             Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-            Objective objective = scoreboard.registerNewObjective("PigmanLand", "dummy", "Lobby Server");
+            Objective objective = scoreboard.registerNewObjective("Arkxia", "dummy", "Lobby Server");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            objective.displayName(Component.text("PigmanLand").color(TextColor.color(255, 165, 0)).decorate(TextDecoration.BOLD));
+            objective.displayName(Component.text("Arkxia").color(TextColor.color(255, 165, 0)).decorate(TextDecoration.BOLD));
             objective.getScore("§7§7-----------------").setScore(5);
             objective.getScore("§bGrade: §7...").setScore(4);
             objective.getScore("§bPing: §6"+event.getPlayer().getPing()+"§bms").setScore(3);
