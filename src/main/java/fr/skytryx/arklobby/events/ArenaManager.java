@@ -1,6 +1,6 @@
-package fr.skytryx.pigmanlobby.events;
+package fr.skytryx.arklobby.events;
 
-import fr.skytryx.pigmanlobby.Util;
+import fr.skytryx.arklobby.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

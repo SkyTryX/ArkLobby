@@ -1,4 +1,4 @@
-package fr.skytryx.pigmanlobby.events;
+package fr.skytryx.arklobby.events;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -23,7 +23,7 @@ public class ScoreboardM implements Listener {
     Map<Player, Integer> list_scheduler = new HashMap<>();
     @EventHandler
     public void JoinScoreboard(PlayerJoinEvent event){
-        int a = Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PigmanLobby")),() -> {
+        int a = Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("ArkLobby")),() -> {
             Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
             Objective objective = scoreboard.registerNewObjective("Arkxia", "dummy", "Lobby Server");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);

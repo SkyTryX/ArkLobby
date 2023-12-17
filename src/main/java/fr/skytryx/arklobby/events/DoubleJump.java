@@ -1,4 +1,4 @@
-package fr.skytryx.pigmanlobby.events;
+package fr.skytryx.arklobby.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -28,7 +28,7 @@ public class DoubleJump implements Listener {
                     public void run() {
                         player.setAllowFlight(true);
                     }
-                }.runTaskLater(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PigmanLobby")), 20);
+                }.runTaskLater(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("ArkLobby")), 20);
                 player.playSound(player, Sound.ENTITY_FIREWORK_ROCKET_BLAST, SoundCategory.AMBIENT, 100f, 1f);
             }
         }

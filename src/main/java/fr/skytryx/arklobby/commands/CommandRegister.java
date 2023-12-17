@@ -1,6 +1,6 @@
-package fr.skytryx.pigmanlobby.commands;
+package fr.skytryx.arklobby.commands;
 
-import fr.skytryx.pigmanlobby.events.LoginManager;
+import fr.skytryx.arklobby.events.LoginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +20,7 @@ public class CommandRegister implements CommandExecutor {
         if(!strings[0].equals(strings[1])) return false;
         if(!(commandSender instanceof Player)) return false;
 
-        final File loginfile = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("PigmanLobby")).getDataFolder(), "login.yml");
+        final File loginfile = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("ArkLobby")).getDataFolder(), "login.yml");
         final YamlConfiguration loginconfig = YamlConfiguration.loadConfiguration(loginfile);
         Player player = (Player) commandSender;
 

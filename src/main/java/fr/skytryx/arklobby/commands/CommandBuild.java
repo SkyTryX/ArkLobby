@@ -1,4 +1,4 @@
-package fr.skytryx.pigmanlobby.commands;
+package fr.skytryx.arklobby.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

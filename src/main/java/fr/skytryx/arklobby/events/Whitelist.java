@@ -1,6 +1,6 @@
-package fr.skytryx.pigmanlobby.events;
+package fr.skytryx.arklobby.events;
 
-import fr.skytryx.pigmanlobby.commands.CommandWhitelist;
+import fr.skytryx.arklobby.commands.CommandWhitelist;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.event.EventHandler;

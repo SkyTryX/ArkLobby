@@ -1,6 +1,6 @@
-package fr.skytryx.pigmanlobby.events;
+package fr.skytryx.arklobby.events;
 
-import fr.skytryx.pigmanlobby.Util;
+import fr.skytryx.arklobby.Util;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
@@ -30,7 +30,7 @@ public class Jump implements Listener {
                 if(scheduler.containsKey(event.getPlayer())){
                     Bukkit.getScheduler().cancelTask(scheduler.get(event.getPlayer()));
                 }
-                int a = Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PigmanLobby")), ()->{
+                int a = Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("ArkLobby")), ()->{
                     if(jump_timer.containsKey(event.getPlayer())){
                         if(jump_timer.get(event.getPlayer()) == -1){
                             int task_id = scheduler.get(event.getPlayer());

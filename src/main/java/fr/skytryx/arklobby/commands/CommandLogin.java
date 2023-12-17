@@ -1,6 +1,6 @@
-package fr.skytryx.pigmanlobby.commands;
+package fr.skytryx.arklobby.commands;
 
-import fr.skytryx.pigmanlobby.events.LoginManager;
+import fr.skytryx.arklobby.events.LoginManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
@@ -21,7 +21,7 @@ public class CommandLogin implements CommandExecutor {
         if(strings.length != 1) return false;
         if(!(commandSender instanceof Player)) return false;
 
-        final File loginfile = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("PigmanLobby")).getDataFolder(), "login.yml");
+        final File loginfile = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("ArkLobby")).getDataFolder(), "login.yml");
         final YamlConfiguration loginconfig = YamlConfiguration.loadConfiguration(loginfile);
         Player player = (Player) commandSender;
 

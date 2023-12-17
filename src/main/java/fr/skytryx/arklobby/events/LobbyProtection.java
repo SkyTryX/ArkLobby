@@ -1,6 +1,6 @@
-package fr.skytryx.pigmanlobby.events;
+package fr.skytryx.arklobby.events;
 
-import fr.skytryx.pigmanlobby.commands.CommandBuild;
+import fr.skytryx.arklobby.commands.CommandBuild;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

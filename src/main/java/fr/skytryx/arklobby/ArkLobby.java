@@ -1,11 +1,11 @@
-package fr.skytryx.pigmanlobby;
+package fr.skytryx.arklobby;
 
-import fr.skytryx.pigmanlobby.commands.CommandBuild;
-import fr.skytryx.pigmanlobby.commands.CommandLogin;
-import fr.skytryx.pigmanlobby.commands.CommandRegister;
-import fr.skytryx.pigmanlobby.commands.CommandWhitelist;
-import fr.skytryx.pigmanlobby.commands.staff.CommandUnregister;
-import fr.skytryx.pigmanlobby.events.*;
+import fr.skytryx.arklobby.commands.CommandBuild;
+import fr.skytryx.arklobby.commands.CommandLogin;
+import fr.skytryx.arklobby.commands.CommandRegister;
+import fr.skytryx.arklobby.commands.CommandWhitelist;
+import fr.skytryx.arklobby.commands.staff.CommandUnregister;
+import fr.skytryx.arklobby.events.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.Objects;
 
-public final class PigmanLobby extends JavaPlugin {
+public final class ArkLobby extends JavaPlugin {
 
     @Override
     public void onEnable() {

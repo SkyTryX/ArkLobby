@@ -1,4 +1,4 @@
-package fr.skytryx.pigmanlobby.commands.staff;
+package fr.skytryx.arklobby.commands.staff;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -16,7 +16,7 @@ public class CommandUnregister implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(strings.length != 1) return false;
 
-        final File loginfile = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("PigmanLobby")).getDataFolder(), "login.yml");
+        final File loginfile = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("ArkLobby")).getDataFolder(), "login.yml");
         final YamlConfiguration loginconfig = YamlConfiguration.loadConfiguration(loginfile);
         if(loginconfig.get(String.valueOf(Bukkit.getOfflinePlayer(strings[0]).getUniqueId())) != null){
             loginconfig.set(String.valueOf(Bukkit.getOfflinePlayer(strings[0]).getUniqueId()), null);

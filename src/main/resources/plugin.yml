@@ -1,6 +1,6 @@
-name: PigmanLobby
+name: ArkLobby
 version: '${project.version}'
-main: fr.skytryx.pigmanlobby.PigmanLobby
+main: fr.skytryx.arklobby.ArkLobby
 api-version: 1.20
 commands:
   build:

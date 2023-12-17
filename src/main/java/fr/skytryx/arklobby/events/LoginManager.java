@@ -1,4 +1,4 @@
-package fr.skytryx.pigmanlobby.events;
+package fr.skytryx.arklobby.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
