@@ -28,6 +28,7 @@ public class CommandRegister implements CommandExecutor {
             player.sendMessage("§c[Login] §bEnregistrement completé. Bon jeu!");
             loginconfig.set(String.valueOf(player.getUniqueId()), strings[0]);
             player.clearActivePotionEffects();
+            LoginManager.IPLogin.put(player, Objects.requireNonNull(player.getAddress()).getHostName());
             LoginManager.LoginAwaiting.remove(player);
             player.setAllowFlight(true);
             player.setFlying(false);
