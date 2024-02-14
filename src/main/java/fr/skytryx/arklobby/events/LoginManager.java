@@ -17,18 +17,16 @@ public class LoginManager implements Listener {
 
     public static List<Player> LoginAwaiting = new ArrayList<>();
 
-    public static HashMap<Player, String> IPLogin = new HashMap<>();
+    public static HashMap<String, String> IPLogin = new HashMap<>();
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
-        String str = IPLogin.get(event.getPlayer());
-        if(str != null){
-            if(!str.equals(Objects.requireNonNull(event.getPlayer().getAddress()).getHostName())){
-                LoginAwaiting.add(event.getPlayer());
-                event.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 0.5, 1, 0.5));
-                event.getPlayer().addPotionEffects(Arrays.asList(new PotionEffect(PotionEffectType.BLINDNESS, 99999, 255, true),
-                        new PotionEffect(PotionEffectType.JUMP, 999999, 150, true),
-                        new PotionEffect(PotionEffectType.SLOW, 999999, 255, true)));
-            }
+        String str = IPLogin.get(event.getPlayer().getName());
+        if(str == null || !str.equals(Objects.requireNonNull(event.getPlayer().getAddress()).getHostName())){
+            LoginAwaiting.add(event.getPlayer());
+            event.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 0.5, 1, 0.5));
+            event.getPlayer().addPotionEffects(Arrays.asList(new PotionEffect(PotionEffectType.BLINDNESS, 99999, 255, true),
+                    new PotionEffect(PotionEffectType.JUMP, 999999, 150, true),
+                    new PotionEffect(PotionEffectType.SLOW, 999999, 255, true)));
         }
     }
 

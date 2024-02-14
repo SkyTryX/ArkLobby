@@ -32,7 +32,7 @@ public class CommandLogin implements CommandExecutor {
                 player.sendMessage("§c[Login] §bMots de passe correct. Bon jeu!");
                 player.clearActivePotionEffects();
                 LoginManager.LoginAwaiting.remove(player);
-                LoginManager.IPLogin.put(player, Objects.requireNonNull(player.getAddress()).getHostName());
+                LoginManager.IPLogin.put(player.getName(), Objects.requireNonNull(player.getAddress()).getHostName());
                 player.setAllowFlight(true);
                 player.setFlying(false);
             } else{
