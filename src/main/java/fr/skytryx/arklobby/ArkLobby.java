@@ -45,9 +45,9 @@ public final class ArkLobby extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> LoginManager.LoginAwaiting.forEach(player ->{
             final YamlConfiguration loginconfig = YamlConfiguration.loadConfiguration(loginfile);
             if(loginconfig.get(String.valueOf(player.getUniqueId())) == null){
-                player.sendMessage("§cEnregistre toi avec /register <password> <password>");
-                player.sendMessage("§4Veuillez utiliser un mots de passe unique étant donné qu'ils ne sont pour l'instant pas sécurisés/encryptés");
-            } else player.sendMessage("§cConnecte toi avec /login <password>");
+                player.sendMessage("§cRegister your account using /register <password> <password>");
+                player.sendMessage("§4WARN: §4§lUse a unique password as our database is not protected at the moment!");
+            } else player.sendMessage("§cConnect with /login <password>");
         }), 0L, 100L);
         Bukkit.getLogger().info("[ArkLobby] Plugin Enabled");
     }

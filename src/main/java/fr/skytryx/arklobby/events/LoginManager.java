@@ -20,6 +20,7 @@ public class LoginManager implements Listener {
     public static HashMap<String, String> IPLogin = new HashMap<>();
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
+        event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), 0, 64, 0));
         String str = IPLogin.get(event.getPlayer().getName());
         if(str == null || !str.equals(Objects.requireNonNull(event.getPlayer().getAddress()).getHostName())){
             LoginAwaiting.add(event.getPlayer());
@@ -27,6 +28,9 @@ public class LoginManager implements Listener {
             event.getPlayer().addPotionEffects(Arrays.asList(new PotionEffect(PotionEffectType.BLINDNESS, 99999, 255, true),
                     new PotionEffect(PotionEffectType.JUMP, 999999, 150, true),
                     new PotionEffect(PotionEffectType.SLOW, 999999, 255, true)));
+        } else{
+            event.getPlayer().setAllowFlight(true);
+            event.getPlayer().setFlying(false);
         }
     }
 

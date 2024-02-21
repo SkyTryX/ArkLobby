@@ -1,8 +1,8 @@
 package fr.skytryx.arklobby.events;
 
 import fr.skytryx.arklobby.Util;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,8 +25,8 @@ public class Jump implements Listener {
             if(Objects.requireNonNull(event.getClickedBlock()).getType().equals(Material.LIGHT_WEIGHTED_PRESSURE_PLATE)){
                 jump_timer.put(event.getPlayer(), 0);
                 event.getPlayer().setAllowFlight(false);
-                event.getPlayer().sendMessage("§c[Jump] §bLe jump commence, bonne chance!");
-                event.getPlayer().getInventory().setItem(8, Util.CreateItem(Material.BARRIER, "§cArreter le jump", Collections.singletonList("§cPour revenir au début du jump")));
+                event.getPlayer().sendMessage("§c[Jump] §bJump started");
+                event.getPlayer().getInventory().setItem(8, Util.CreateItem(Material.BARRIER, "§cStop", Collections.singletonList("§cGet back to the start of the jump")));
                 if(scheduler.containsKey(event.getPlayer())){
                     Bukkit.getScheduler().cancelTask(scheduler.get(event.getPlayer()));
                 }
@@ -39,7 +39,7 @@ public class Jump implements Listener {
                             Bukkit.getScheduler().cancelTask(task_id);
                         } else{
                             jump_timer.put(event.getPlayer(), jump_timer.get(event.getPlayer())+1);
-                            event.getPlayer().sendActionBar(Component.text("Jump: "+ jump_timer.get(event.getPlayer()) + "s").color(TextColor.color(0, 255, 0)));
+                            event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§3Jump: §6"+ jump_timer.get(event.getPlayer()) + "§3s"));
                         }
                     }
                 }, 20L, 20L);
@@ -48,7 +48,7 @@ public class Jump implements Listener {
                 if(jump_timer.containsKey(event.getPlayer())){
                     event.getPlayer().getInventory().remove(Material.BARRIER);
                     event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), 0, 1, 0));
-                    event.getPlayer().sendMessage("§c[Jump] §bTu as finit le jump en §6"+jump_timer.get(event.getPlayer())+" §bsecondes");
+                    event.getPlayer().sendMessage("§c[Jump] §bYou finished in §6"+jump_timer.get(event.getPlayer())+" §bsecondes");
                     event.getPlayer().setAllowFlight(true);
                     jump_timer.put(event.getPlayer(), -1);
 
@@ -56,11 +56,11 @@ public class Jump implements Listener {
             }
         } else if(Arrays.asList(Action.RIGHT_CLICK_AIR, Action.RIGHT_CLICK_BLOCK).contains(event.getAction())){
             if(event.getItem() != null){
-                if(event.getItem().getType() == Material.BARRIER && event.getItem().getItemMeta().getDisplayName().equals("§cArreter le jump")){
+                if(event.getItem().getType() == Material.BARRIER && event.getItem().getItemMeta().getDisplayName().equals("§cStop")){
                     if(jump_timer.containsKey(event.getPlayer())){
                         jump_timer.put(event.getPlayer(), -1);
                         event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), 0, 1, 0));
-                        event.getPlayer().sendMessage("§c[Jump] §bTu as arrêté le jump.");
+                        event.getPlayer().sendMessage("§c[Jump] §bYou stopped the jump.");
                         event.getPlayer().setAllowFlight(true);
                         event.getPlayer().getInventory().remove(Material.BARRIER);
                     }

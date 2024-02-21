@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -18,16 +19,16 @@ public class CommandRegister implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(strings.length != 2) return false;
         if(!strings[0].equals(strings[1])) return false;
-        if(!(commandSender instanceof Player)) return false;
+        if(!(commandSender instanceof Player player)) return false;
 
         final File loginfile = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("ArkLobby")).getDataFolder(), "login.yml");
         final YamlConfiguration loginconfig = YamlConfiguration.loadConfiguration(loginfile);
-        Player player = (Player) commandSender;
 
         if(loginconfig.get(String.valueOf(player.getUniqueId())) == null){
-            player.sendMessage("§c[Login] §bEnregistrement completé. Bon jeu!");
+            player.sendMessage("§c[Login] §bYou're now registered, have fun!");
             loginconfig.set(String.valueOf(player.getUniqueId()), strings[0]);
-            player.clearActivePotionEffects();
+            for (PotionEffect effect : player.getActivePotionEffects())
+                player.removePotionEffect(effect.getType());
             LoginManager.IPLogin.put(player.getName(), Objects.requireNonNull(player.getAddress()).getHostName());
             LoginManager.LoginAwaiting.remove(player);
             player.setAllowFlight(true);

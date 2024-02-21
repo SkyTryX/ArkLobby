@@ -1,48 +1,63 @@
 package fr.skytryx.arklobby.events;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class ScoreboardM implements Listener {
 
-    Map<Player, Integer> list_scheduler = new HashMap<>();
-    @EventHandler
-    public void JoinScoreboard(PlayerJoinEvent event){
-        int a = Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("ArkLobby")),() -> {
-            Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-            Objective objective = scoreboard.registerNewObjective("Arkxia", "dummy", "Lobby Server");
-            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            objective.displayName(Component.text("Arkxia").color(TextColor.color(255, 165, 0)).decorate(TextDecoration.BOLD));
-            objective.getScore("§7§7-----------------").setScore(5);
-            objective.getScore("§bGrade: §7...").setScore(4);
-            objective.getScore("§bPing: §6"+event.getPlayer().getPing()+"§bms").setScore(3);
-            objective.getScore(" ").setScore(2);
-            objective.getScore("§bTPS: §6"+ Math.round(Arrays.stream(Bukkit.getTPS()).sum()/3)).setScore(1);
-            objective.getScore("§7-----------------").setScore(0);
-            event.getPlayer().setScoreboard(scoreboard);
-        }, 0L , 20L);
-        list_scheduler.put(event.getPlayer(), a);
+    public HashMap<Player, Integer> score_list = new HashMap<>();
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void join_sb(PlayerJoinEvent event){
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("ArkLobby")), () ->{
+            Scoreboard sb = Objects.requireNonNull(Bukkit.getServer().getScoreboardManager()).getNewScoreboard();
+            Objective obj = sb.registerNewObjective("Scoreboard", "Dummy");
+
+            obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+            obj.setDisplayName("§b§lArkxia §f§l- §3§lLobby");
+
+            Team rank = sb.registerNewTeam("r-"+event.getPlayer().getUniqueId().toString().substring(0, 12));
+            rank.addEntry("§1");
+            rank.setPrefix("§3Rank: ...");
+
+            Team ping = sb.registerNewTeam("p-"+event.getPlayer().getUniqueId().toString().substring(0, 12));
+            ping.addEntry("§2");
+            ping.setPrefix("§3Ping: ");
+            ping.setSuffix("§b"+(event.getPlayer().getPing()+"ms"));
+
+
+            obj.getScore("§7-------------------").setScore(4);
+            obj.getScore("§1").setScore(3);
+            obj.getScore("§2").setScore(2);
+            obj.getScore("§7§7-------------------").setScore(1);
+            obj.getScore("§6arkxia.ddns.net").setScore(0);
+
+
+            event.getPlayer().setScoreboard(sb);
+
+
+            int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("ArkLobby")), ()-> ping.setSuffix("§b"+(event.getPlayer().getPing()+"ms")), 20L, 20L);
+
+            score_list.put(event.getPlayer(), id);
+        }, 20L);
     }
 
     @EventHandler
-    public void QuitScoreboard(PlayerQuitEvent event){
-        if(list_scheduler.containsKey(event.getPlayer())){
-            Bukkit.getScheduler().cancelTask(list_scheduler.get(event.getPlayer()));
+    public void onleavesb(PlayerQuitEvent event){
+        if(score_list.containsKey(event.getPlayer())){
+            Bukkit.getScheduler().cancelTask(score_list.get(event.getPlayer()));
         }
     }
 }

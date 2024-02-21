@@ -9,7 +9,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -24,7 +24,7 @@ public class ArenaManager implements Listener {
         ItemStack item = event.getItem();
         if(item == null) return;
         if(LoginManager.LoginAwaiting.contains(event.getPlayer())) return;
-        if(item.getType() == Material.BOW && item.getItemMeta().getDisplayName().equals("§6ArenePvP")) {
+        if(item.getType() == Material.BOW && Objects.requireNonNull(item.getItemMeta()).getDisplayName().equals("§6ArenaPvP")) {
             player.getInventory().clear();
             player.teleport(new Location(player.getWorld(), 500, 101, 500));
             event.getPlayer().setAllowFlight(false);
@@ -48,14 +48,14 @@ public class ArenaManager implements Listener {
             player.getInventory().setLeggings(jambiere);
             player.getInventory().setBoots(bottes);
 
-        } else if(item.getType() == Material.BARRIER && item.getItemMeta().getDisplayName().equals("§cQuitter Arène")){
+        } else if(item.getType() == Material.BARRIER && Objects.requireNonNull(item.getItemMeta()).getDisplayName().equals("§cLeave Arena")){
             player.getInventory().clear();
             player.setHealth(Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
             player.setSaturation(20);
             player.setFoodLevel(20);
-            player.getInventory().setItem(0, Compass.ItemCreator(Material.COMPASS, "§6Selecteur de Serveur"));
-            player.getInventory().setItem(1, Compass.ItemCreator(Material.BOW, "§6ArenePvP"));player.teleport(new Location(player.getWorld(), 0.5, 1, 0.5));
-            player.sendMessage("§c[ArenePvP] §bTu es maintenant au lobby");
+            player.getInventory().setItem(0, Compass.ItemCreator(Material.COMPASS, "§6Server Selector"));
+            player.getInventory().setItem(1, Compass.ItemCreator(Material.BOW, "§6ArenaPvP"));player.teleport(new Location(player.getWorld(), 0.5, 1, 0.5));
+            player.sendMessage("§c[ArenaPvP] §bYou are now in the lobby");
             event.getPlayer().setAllowFlight(true);
             ArenaList.remove(player);
         }
@@ -67,19 +67,21 @@ public class ArenaManager implements Listener {
     }
 
     @EventHandler
-    public void onDeath(PlayerDeathEvent event){
-        if(ArenaList.contains(event.getPlayer())){
-            event.setCancelled(true);
-            event.getPlayer().getInventory().clear();
-            event.getPlayer().setHealth(Objects.requireNonNull(event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
-            event.getPlayer().setSaturation(20);
-            event.getPlayer().setFoodLevel(20);
-            event.getPlayer().getInventory().setItem(0, Compass.ItemCreator(Material.COMPASS, "§6Selecteur de Serveur"));
-            event.getPlayer().getInventory().setItem(1, Compass.ItemCreator(Material.BOW, "§6ArenePvP"));
-            event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), 0.5, 1, 0.5));
-            Bukkit.broadcastMessage("§c[ArenePvP] §6"+ Objects.requireNonNull(event.getPlayer().getKiller()).getName()+" §ba tué §6"+ event.getPlayer().getName());
-            event.getPlayer().setAllowFlight(true);
-            ArenaList.remove(event.getPlayer());
+    public void onDamage(EntityDamageEvent event) {
+        if(event.getEntity() instanceof Player player && ArenaList.contains(player)){
+            if(event.getFinalDamage() >= player.getHealth()) {
+                event.setCancelled(true);
+                player.getInventory().clear();
+                player.setHealth(Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
+                player.setSaturation(20);
+                player.setFoodLevel(20);
+                player.getInventory().setItem(0, Compass.ItemCreator(Material.COMPASS, "§6Server Selector"));
+                player.getInventory().setItem(1, Compass.ItemCreator(Material.BOW, "§6ArenaPvP"));
+                player.teleport(new Location(player.getWorld(), 0.5, 64, 0.5));
+                Bukkit.broadcastMessage("§c[ArenaPvP] §6" + Objects.requireNonNull(player.getKiller()).getName() + " §bkilled §6" + player.getName());
+                player.setAllowFlight(true);
+                ArenaList.remove(player);
+            }
         }
     }
 }
